@@ -4,6 +4,7 @@ from aiogram import Bot
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery
 from telegram_bot_calendar import DetailedTelegramCalendar
+import loguru
 
 from database.orm import adv_orm, user_orm, session_orm
 from database.db_connection import get_session
@@ -156,8 +157,9 @@ async def send_result_to_channel(call: CallbackQuery, bot: Bot, state: FSMContex
         try:
             await send_to_channel(adv, id_long, "long", bot)
             await send_to_channel(adv, id_short, "short", bot)
-        except Exception:
+        except Exception as e:
             await call.message.answer(text="Неизвестная ошибка, попробуйте ввести объявление заново или написать админу")
+            loguru.logger.info(f"Error send: {e}")
         finally:
             await state.set_state(MainStates.start)
 

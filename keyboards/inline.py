@@ -18,7 +18,8 @@ def city_keyboard() -> InlineKeyboardMarkup:
     keyboard_builder.button(text="Санкт-Петербург", callback_data="Санкт-Петербург")
     keyboard_builder.button(text="Новосибирск", callback_data="Новосибирск")
     keyboard_builder.button(text="Екатеринбург", callback_data="Екатеринбург")
-    keyboard_builder.adjust(1, 1, 1, 1)
+    keyboard_builder.button(text="Казань", callback_data="Казань")
+    keyboard_builder.adjust(1, 1, 1, 1, 1)
     return keyboard_builder.as_markup()
 
 

@@ -21,7 +21,10 @@ async def start(message: Message, bot: Bot, state: FSMContext):
     await set_commands(bot)
 
     if message.message_id - 1:
-        await bot.delete_message(message_id=(message.message_id - 1), chat_id=message.chat.id)
+        try:
+            await bot.delete_message(message_id=(message.message_id - 1), chat_id=message.chat.id)
+        except Exception:
+            pass
 
     await message.answer(text=f'<strong> Выберите город </strong> в котором хотите разместить объявление',
                          reply_markup=city_keyboard(), parse_mode="HTML")
@@ -35,6 +38,7 @@ async def cancel(message: Message, bot: Bot, state: FSMContext):
         await bot.delete_message(message_id=(message.message_id - 1), chat_id=message.chat.id)
     await state.set_state(MainStates.cancel)
     await message.answer(text=f'Создание объявления отменено. Для создания нового напишите /start')
+
 
 async def cancel_call(call: CallbackQuery, bot: Bot, state: FSMContext):
     await call.message.delete()

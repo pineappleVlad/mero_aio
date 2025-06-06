@@ -5,14 +5,14 @@ from .db_connection import Base
 
 class Users(Base):
     __tablename__ = "users"
-    id = Column(Integer, primary_key=True, autoincrement=True, index=True)
+    id = Column(BigInteger, primary_key=True, autoincrement=True, index=True)
     chat_id = Column(BigInteger, unique=True)
     city = Column(String)
 
 class Advertisements(Base):
     __tablename__ = "advertisements"
 
-    id = Column(Integer, primary_key=True, autoincrement=True, index=True)
+    id = Column(BigInteger, primary_key=True, autoincrement=True, index=True)
     city_publish = Column(String)
     theme = Column(String)
     name = Column(String)
